@@ -1,7 +1,8 @@
 /* This is a sample test program which tests 
 the ArrayListDemo class we built to make sure
 the implemantion of our ArrayList returns correcct output
-otherwise the test will tell us otherwise.*/
+otherwise the test will tell us otherwise.
+@Author- Abdiwahid Bishar Hajir*/
 import java.util.*;
 public class TestArrayDemo{
    public static void main(String[] args){
