@@ -53,14 +53,14 @@ public class ArrayListDemo implements Comparable<ArrayListDemo>{
    public ArrayListDemo addEverything(ArrayListDemo other){
       ArrayListDemo demo = new ArrayListDemo(other.elementData.length + elementData.length);;
       try{
-         for(int i = 0; i < other.elementData.length; ++i){
+         for(int i = 0; i < Math.max(other.elementData.length, elementData.length); ++i){
             demo.elementData[i] += elementData[i] + other.elementData[i];
          }
       }catch(ArrayIndexOutOfBoundsException e){
          e.printStackTrace();
       }
-      demo.size += other.size;
-      size += demo.size;
+      demo.size += Math.max(this.size, other.size);
+      //size += demo.size;
       return demo;
    }
    
