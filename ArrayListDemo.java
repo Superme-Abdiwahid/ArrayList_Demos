@@ -11,15 +11,14 @@ Implements Comparble interface.
 @Author Abdiwahid Bishar Hajir
 */
 import java.util.*;
-public class ArrayListDemo implements Comparable<ArrayListDemo>{
-   public static final int MAX_DEFEAULT_CAPACITY = 100;
-   private int elementData[];
+public class ArrayListDemo <E extends Comparable<E>> extends ArrayList<E> implements Comparable<ArrayListDemo>{
+   private Object elementData[];
    private int size;
    
    /* Constructs an array of a given size defulat
    this is how big the size of the ArrayList Demo would be.*/ 
    public ArrayListDemo(){
-      this(MAX_DEFEAULT_CAPACITY);
+      elementData = new Object[100];
    }
    
    /* Constructs an ArrayListDemo of the size
@@ -27,7 +26,7 @@ public class ArrayListDemo implements Comparable<ArrayListDemo>{
    they will be able to create an array list demo 
    of a given certain size they choose.*/
    public ArrayListDemo(int actualSize){
-      elementData = new int[actualSize];
+      elementData = new Object[actualSize];
       size = 0;
    }
    
@@ -35,13 +34,18 @@ public class ArrayListDemo implements Comparable<ArrayListDemo>{
    specfices and wants a letter a negative index
    The clinet calls this method to get the object
    at a  certain index in the list. This operation is fast*/
+ 
    public int get(int index){
-      if(index < 0){
+      if(index < 0 ||index >= size){
          throw new IllegalArgumentException();
       }
-      return elementData[index];
+      //return elementData[index];
    
    }
+   
+   // WE WILL FIX NEXT TIME. HAVE TO DO 
+   // OBJECT AND GENERICS Right know wont work
+   
    
    /* This method returns a new ArrayListDemo
    which adds one list to another everything inside the list
@@ -50,7 +54,7 @@ public class ArrayListDemo implements Comparable<ArrayListDemo>{
    And returns this as a new ArrayList. If both list have different sizes
    the bigger lists elements gets added to 0. To make up for the 
    incomplete numbers at the indexs. */
-   public ArrayListDemo addEverything(ArrayListDemo other){
+  public ArrayListDemo addEverything(ArrayListDemo other){
       ArrayListDemo demo = new ArrayListDemo(other.elementData.length + elementData.length);;
       try{
          for(int i = 0; i < Math.max(other.elementData.length, elementData.length); ++i){
@@ -96,15 +100,16 @@ public class ArrayListDemo implements Comparable<ArrayListDemo>{
    to be able to add elements to a list easier
    it takes the value the clinet wants to add to a 
    list and stores those accordinly.*/
-   public void add(int value){
+   public boolean add(E value){
       elementData[size] = value;
       size++;
+      return true;
    }
    
    /* The clinet calls this method
-   to remove everything from a list. It empties 
+   to remove everything and clear everything from a list. It empties 
    out the list and its content.*/
-   public void removeAll(){
+   public void clear(){
       this.size = 0;
    }
    
@@ -113,8 +118,5 @@ public class ArrayListDemo implements Comparable<ArrayListDemo>{
    public int compareTo(ArrayListDemo other){
       return Integer.compare(this.elementData.length, other.elementData.length);
    }
-
-
-
-
-}
+   
+    }
