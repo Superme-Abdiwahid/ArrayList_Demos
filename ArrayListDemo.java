@@ -12,13 +12,13 @@ Implements Comparble interface.
 */
 import java.util.*;
 public class ArrayListDemo <E extends Comparable<E>> extends ArrayList<E> implements Comparable<ArrayListDemo>{
-   private Object elementData[];
+   private E[] elementData;
    private int size;
    
    /* Constructs an array of a given size defulat
    this is how big the size of the ArrayList Demo would be.*/ 
    public ArrayListDemo(){
-      elementData = new Object[100];
+      this(100);
    }
    
    /* Constructs an ArrayListDemo of the size
@@ -26,7 +26,7 @@ public class ArrayListDemo <E extends Comparable<E>> extends ArrayList<E> implem
    they will be able to create an array list demo 
    of a given certain size they choose.*/
    public ArrayListDemo(int actualSize){
-      elementData = new Object[actualSize];
+      elementData = (E[]) new Object[actualSize];
       size = 0;
    }
    
@@ -35,11 +35,11 @@ public class ArrayListDemo <E extends Comparable<E>> extends ArrayList<E> implem
    The clinet calls this method to get the object
    at a  certain index in the list. This operation is fast*/
  
-   public int get(int index){
+   public E get(int index){
       if(index < 0 ||index >= size){
          throw new IllegalArgumentException();
       }
-      //return elementData[index];
+      return elementData[index];
    
    }
    
@@ -54,7 +54,7 @@ public class ArrayListDemo <E extends Comparable<E>> extends ArrayList<E> implem
    And returns this as a new ArrayList. If both list have different sizes
    the bigger lists elements gets added to 0. To make up for the 
    incomplete numbers at the indexs. */
-  public ArrayListDemo addEverything(ArrayListDemo other){
+  public ArrayListDemo<E> addEverything(ArrayListDemo<E> other){
       ArrayListDemo demo = new ArrayListDemo(other.elementData.length + elementData.length);;
       try{
          for(int i = 0; i < Math.max(other.elementData.length, elementData.length); ++i){
